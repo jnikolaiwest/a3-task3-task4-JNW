@@ -1,0 +1,34 @@
+---
+title: "a3_task4_jessica_west"
+author: "Jessica West"
+date: "10/24/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(janitor)
+library(here)
+```
+
+```{r}
+purple_urchins_control_kelp_annual <- read_csv(here("data", "urchins.csv"))
+clean_purple_urchins_control_kelp_annual <- clean_names(purple_urchins_control_kelp_annual)
+```
+
+###3.	Compare the mean size of purple urchins in CONTROL (no giant kelp removal) or ANNUAL (annual kelp removal) sections of Naples Reef in 2010. 
+
+a.	Only include Naples Reef observations for purple urchins observed in 2010. Hint: convert date to "Date" class with lubridate, then use the `year()` functions to add a new columns for year that you can use as variable for filtering. 
+
+b.	Look at and consider exploratory faceted histograms and QQ-plots for the size distribution of purple urchins at Naples in 2010, separated by treatment (Control and Annual), to assess normality. These are exploratory and do not need to be finalized and you do not need to add figure captions, but these should appear in your knitted document. Below the graphs add 1 - 2 sentences describing your main takeaways about the distribution of purple urchin sizes for each treatment (distribution, comparison, patterns, etc.).
+
+c.	Create a finalized basic summary table (with table caption above) of descriptive statistics for both groups (including at least the mean, standard deviation, and sample size by treatment). 
+
+Notes on Task 4: Update your code chunk settings so that warnings & messages don’t show up. Otherwise, organization is up to you - we’re looking for a highly organized, nicely formatted report with the code and outputs included, along with text that helps to understand the distribution and comparison of the two groups. You need to check your kitted html for clear organization and formatting. 
+
+```{r}
+
+```
+
