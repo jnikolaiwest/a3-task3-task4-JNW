@@ -1,5 +1,5 @@
 ---
-title: "a3_task3_jessica_west"
+title: "Assignment 3 - Task 3"
 author: "Jessica West"
 date: "10/23/2021"
 output: html_document
@@ -14,7 +14,6 @@ library(here)
 library(kableExtra)
 library(DT)
 library(lubridate)
-options(digits = 4)
 ```
 
 ```{r}
@@ -23,16 +22,6 @@ urchins_clean <- clean_names(urchins)
 ```
 
 ```{r}
-ggplot(data = urchins_clean, aes(x = size)) + 
-   facet_wrap(~ common_name) +
-  geom_histogram(fill="blue", color = "black", bins = 10) +
-  theme_classic() +
-   labs(x = "Diameter (cm)", 
-       y = "Urchin Samples", 
-       title = "Size Distribution of Purple and Red Urchins",
-       subtitle = "2008-2020",
-       caption = "Data source: Reed, D, R. Miller (2021)")
-
 urchins_sum <- urchins_clean %>% 
   group_by(common_name) %>% 
   summarize(mean_diameter_cm = mean(size, na.rm = TRUE),
@@ -40,9 +29,25 @@ urchins_sum <- urchins_clean %>%
             sd_diameter_cm = sd(size, na.rm = TRUE),
             sample_size = n())
 
-datatable(urchins_sum)
+ggplot(data = urchins_clean, aes(x = size)) + 
+   facet_wrap(~ common_name) +
+  geom_histogram(fill="blue", color = "black", bins = 10) +
+  theme_classic() +
+   labs(x = "Diameter (cm)", 
+       y = "Number of Urchin Samples", 
+       title = "Size Distribution of Purple and Red Urchins",
+       subtitle = "2008-2020",
+       caption = "Data source: Reed, D C (2021)")
+
+urchins_sum %>% 
+    kable(digits = 2,
+          caption = "Size Distribution of Purple and Red Urchins (2008-2020)", 
+          col.names = c("Common Name", "Mean (cm)", "Median (cm)", "Standard Deviation (cm)", "Sample Size")) %>%
+  kable_styling(full_width = FALSE)
 ```
-### The above graph and datatable reflect a not-quite evenly distributed mean for purple urchins and a normal distribution for red urchins diamter size. Purple urchins also show a smaller/narrower standard deviation (~65%) and red urchins show a larger/wider standard deviation (~99%).
+
+
+The above figures reflect a not-quite evenly distributed mean for purple urchins and a normal distribution for red urchins diameter size. Purple urchins also show a smaller/narrower standard deviation (~65%) and red urchins show a larger/wider standard deviation (~99%).
 
 
 ```{r}
@@ -62,23 +67,27 @@ purple_urchins <- purple_urchin_dates %>%
 
 ```{r}
 total_purple_urchins_site_year <- purple_urchins %>% 
-  group_by(common_name) %>% 
-  summarize(site = site_full,
-            year = year_new)
+  group_by(site_full, year_new) %>% 
+  count (year_new)
+```
+
+```{r, include = FALSE}
+total_purple_urchins_site_year %>% 
+  kable(digits = 2) %>%
+  kable_styling(full_width = FALSE)
 ```
 
 ```{r}
-ggplot(data = total_purple_urchins_site_year, aes(x = year)) + 
-   facet_wrap(~ site) +
-  geom_histogram(fill="purple", color = "black", bins = 10) +
+ggplot(data = total_purple_urchins_site_year, aes(x = year_new , y = n)) + 
+   facet_wrap(~ site_full, scales = "free") +
+  geom_col(fill="purple", color = "black", bins = 10) +
   theme_classic() +
    labs(x = "Year", 
        y = "Population", 
        title = "Population Trends of Purple Urchin (Strongylocentrotus purpuratus)",
        subtitle = "2008-2020",
-       caption = "Data source: Reed, D, R. Miller (2021)")
+       caption = "Data source: Reed, D C (2021)")
 ```
 
-### The graphs above indicate what appears to be have been a population spike around 2010 (excluding Mohawk Reef were samples were not collected this year), with a semi-consistent population size from 2011-2019 and another small spike around 2017. The 2020 population size, however, does appear to be much lower than the previous years in this study. While this graph may visually provide insights into purple urchin numbers, we should also consider how mean, median, and standard deviation totals influence counts, as well as external variables that may be influencing urchin populations within each site (ie. kelp density, harvest rates, etc.) in order to make more a accurate assessment of population trends.
-
+The figure above indicate what appears to be have been a population spike around 2010 (excluding Mohawk Reef were samples were not collected this year), with a semi-consistent population size from 2011-2019 and another small spike around 2017. The 2020 population size, however, does appear to be much lower than the previous years in this study. While this graph may visually provide insights into purple urchin numbers, we should also consider how mean, median, and standard deviation totals influence counts, as well as external variables that may be influencing urchin populations within each site (ie. kelp density, harvest rates, etc.) in order to make more a accurate assessment of population trends.
 
