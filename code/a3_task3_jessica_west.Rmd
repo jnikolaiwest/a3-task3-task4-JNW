@@ -5,7 +5,7 @@ date: "10/23/2021"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = TRUE, warning = FALSE, message = FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 library(tidyverse)
@@ -89,5 +89,5 @@ ggplot(data = total_purple_urchins_site_year, aes(x = year_new , y = n)) +
        caption = "Data source: Reed, D C (2021)")
 ```
 
-The figure above indicate what appears to be have been a population spike around 2010 (excluding Mohawk Reef were samples were not collected this year), with a semi-consistent population size from 2011-2019 and another small spike around 2017. The 2020 population size, however, does appear to be much lower than the previous years in this study. While this graph may visually provide insights into purple urchin numbers, we should also consider how mean, median, and standard deviation totals influence counts, as well as external variables that may be influencing urchin populations within each site (ie. kelp density, harvest rates, etc.) in order to make more a accurate assessment of population trends.
+The figure above indicates what appears to be a decline in the purple urchin population at each location since about 2012. The population visually seems relatively stable after this decline between 2013-2019, but with a significant drop in 2020 (with relatively similar low numbers in 2008, save for Mohwak Reef where samples were not collected this year). While this graph may visually provide insights into urchin numbers, we should also consider external variables that may be influencing urchin populations within each site (ie. kelp density, harvest rates, etc.) in order to make a more accurate assessment of overall population trends.
 

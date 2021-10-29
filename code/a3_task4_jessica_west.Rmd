@@ -5,15 +5,15 @@ date: "10/24/2021"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = TRUE, warning = FALSE, message = FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 library(tidyverse)
 library(janitor)
 library(here)
-library(lubridate)
 library(plotly)
 library(kableExtra)
+library(lubridate)
 ```
 
 ```{r}
@@ -42,7 +42,7 @@ ggplot(data = urchins_kelp__napl_2010, aes(sample = size)) +
   theme_classic()
 ```
 
-The above figures show differences between purple urchin size as a result of annual and control kelp treatment. Both the annual and control treatments appear to be not-quite evenly distributed for purple urchin populations with relatively larger/wider standard deviations (~99%).
+The above figures show differences between purple urchin size as a result of annual and control kelp treatment. Both the annual and control treatments appear to be not-quite evenly distributed for purple urchin populations, with relatively larger/wider standard deviations (~99%). This distribution and spread between annual and control populations is fairly similar, from a visual standpoint. 
 
 ```{r}
 urchin_kelp_stats <- urchins_kelp__napl_2010 %>% 
